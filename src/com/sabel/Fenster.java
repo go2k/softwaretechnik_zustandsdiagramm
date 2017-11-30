@@ -12,28 +12,25 @@ public class Fenster extends JFrame {
     private JButton jbtnA;
     private JButton jbtnB;
     private JButton jbtnC;
+    private Model model;
 
-    private enum Farbe {ROT, BLAU, GRUEN, GELB}
-
-    private Farbe farbe;
 
     public Fenster() {
         this.setTitle("Mein erstes Fenster");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         initEvents();
-        start();
+
         this.setSize(300, 300);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
-    private void start() {
-        farbe = Farbe.ROT;
-        setColor();
+    public void setModel(Model model) {
+        this.model = model;
     }
 
-    private void setColor() {
+    public void setColor(Farbe farbe) {
         switch (farbe) {
             case ROT:
                 jPanel.setBackground(Color.RED);
@@ -48,73 +45,31 @@ public class Fenster extends JFrame {
                 jPanel.setBackground(Color.GREEN);
                 break;
         }
+
+
     }
 
     private void initEvents() {
-
         jbtnA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (farbe) {
-                    case ROT:
-                        farbe = Farbe.GRUEN;
-                        break;
-                    case GELB:
-                        System.exit(0);
-                        break;
-                    case BLAU:
-                        farbe = Farbe.BLAU;
-                        break;
-                    case GRUEN:
-                        farbe = Farbe.BLAU;
-                        break;
-                }
-                setColor();
+                model.pfeilA();
             }
         });
 
         jbtnB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (farbe) {
-                    case ROT:
-                        farbe = Farbe.BLAU;
-                        break;
-                    case GELB:
-                        farbe = Farbe.BLAU;
-                        break;
-                    case BLAU:
-                        farbe = Farbe.ROT;
-                        break;
-                    case GRUEN:
-                        farbe = Farbe.GRUEN;
-                        break;
-                }
-                setColor();
+                model.pfeilB();
             }
         });
 
         jbtnC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (farbe) {
-                    case ROT:
-                        farbe = Farbe.ROT;
-                        break;
-                    case GELB:
-                        farbe = Farbe.ROT;
-                        break;
-                    case BLAU:
-                        farbe = Farbe.GRUEN;
-                        break;
-                    case GRUEN:
-                        farbe = Farbe.GELB;
-                        break;
-                }
-                setColor();
+                model.pfeilC();
             }
         });
-
     }
 
     private void initComponents() {
