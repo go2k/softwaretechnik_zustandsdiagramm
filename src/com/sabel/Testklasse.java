@@ -7,6 +7,7 @@ public class Testklasse {
         Model model = new Model(fenster);
         fenster.setModel(model);
         System.out.println("Ende");
+
     }
 
 }
